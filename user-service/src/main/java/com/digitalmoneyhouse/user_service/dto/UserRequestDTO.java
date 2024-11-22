@@ -3,11 +3,7 @@ package com.digitalmoneyhouse.user_service.dto;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
-import lombok.Getter;
-import lombok.Setter;
 
-@Getter
-@Setter
 public class UserRequestDTO {
 
     @NotBlank(message = "First name is required")
@@ -30,7 +26,6 @@ public class UserRequestDTO {
     @Size(min = 8, message = "Password must be at least 8 characters long")
     private String password;
 
-
     public @NotBlank(message = "First name is required") String getFirstName() {
         return firstName;
     }
@@ -47,7 +42,7 @@ public class UserRequestDTO {
         this.lastName = lastName;
     }
 
-    public @NotBlank String getDni(String number) {
+    public @NotBlank(message = "DNI is required") String getDni() {
         return dni;
     }
 
