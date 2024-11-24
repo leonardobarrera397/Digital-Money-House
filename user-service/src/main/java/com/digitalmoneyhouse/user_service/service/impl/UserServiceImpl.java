@@ -22,24 +22,27 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     public UserResponseDTO registerUser(UserRequestDTO userRequestDTO) {
-        // Crear la entidad User manualmente a partir del UserRequestDTO
+
+
         User user = new User();
         user.setFirstName(userRequestDTO.getFirstName());
         user.setLastName(userRequestDTO.getLastName());
+        user.setDni(userRequestDTO.getDni());
         user.setEmail(userRequestDTO.getEmail());
         user.setPhone(userRequestDTO.getPhone());
         user.setPassword(userRequestDTO.getPassword());
         user.setCvu(generateCvu());
         user.setAlias(aliasGenerator.generateAlias());
 
-        // Guardar el usuario en la base de datos
+
         User savedUser = userRepository.save(user);
 
-        // Crear manualmente el UserResponseDTO a partir de la entidad User
+
         UserResponseDTO responseDTO = new UserResponseDTO();
         responseDTO.setId(savedUser.getId());
         responseDTO.setFirstName(savedUser.getFirstName());
         responseDTO.setLastName(savedUser.getLastName());
+        responseDTO.setDni(savedUser.getDni());
         responseDTO.setEmail(savedUser.getEmail());
         responseDTO.setPhone(savedUser.getPhone());
         responseDTO.setCvu(savedUser.getCvu());
@@ -48,8 +51,8 @@ public class UserServiceImpl implements IUserService {
         return responseDTO;
     }
 
+
     private String generateCvu() {
-        // Generar un CVU único de 22 dígitos
         return String.format("%022d", new Random().nextLong() & Long.MAX_VALUE);
     }
 }
