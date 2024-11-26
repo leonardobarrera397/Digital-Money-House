@@ -1,0 +1,22 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: gateway-service
+  config:
+    import: "optional:configserver:"
+  cloud:
+    config:
+      discovery:
+        service-id: config-service
+        enabled: true
+    gateway:
+      mvc:
+        routes:
+          - id: user-service
+            uri: lb://user-service
+            predicates:
+            - Path=/api/users/*
+            filters:
+              - AddRequestHeader=Origen, gateway
+              - AddResponseHeader= Header en respuesta, Desde gateway
