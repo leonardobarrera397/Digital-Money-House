@@ -20,3 +20,19 @@ spring:
             filters:
               - AddRequestHeader=Origen, gateway
               - AddResponseHeader= Header en respuesta, Desde gateway
+# Keycloak Config
+  security:
+    oauth2:
+      resource server:
+        jwt:
+          issuer-uri: http://localhost:9090/realms/dmh
+          jwk-set-uri: http://localhost:9090/realms/dmh/protocol/openid-connect/certs
+
+jwt:
+  auth:
+    converter:
+      resource-id: dmh-client
+      principle-attribute: preferred_username
+
+logging:
+  level.org.keycloak = DEBUG
