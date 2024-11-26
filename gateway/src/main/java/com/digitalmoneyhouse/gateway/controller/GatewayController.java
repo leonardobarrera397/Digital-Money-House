@@ -13,6 +13,7 @@ public class GatewayController {
 
     @GetMapping("/prueba")
     public String prueba() {
+
         return "Hola gateway";
     }
 }
