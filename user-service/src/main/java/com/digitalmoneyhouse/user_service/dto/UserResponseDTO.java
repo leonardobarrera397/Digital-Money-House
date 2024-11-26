@@ -1,38 +1,18 @@
-package com.digitalmoneyhouse.user_service.model;
-import jakarta.persistence.*;
+package com.digitalmoneyhouse.user_service.dto;
 
-@Entity
-@Table(name = "users")
-public class User {
+public class UserResponseDTO {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @Column(nullable = false)
     private String firstName;
-
-    @Column(nullable = false)
     private String lastName;
-
-    @Column(nullable = false)
     private String dni;
-
-    @Column(nullable = false)
     private String email;
-
-    @Column(nullable = false)
     private String phone;
-
-    @Column(nullable = false)
-    private String password;
-
-    @Column(nullable = false, unique = true)
     private String cvu;
-
-    @Column(nullable = false, unique = true)
     private String alias;
 
+    public UserResponseDTO() {
+    }
 
     public Long getId() {
         return id;
@@ -82,14 +62,6 @@ public class User {
         this.phone = phone;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     public String getCvu() {
         return cvu;
     }
@@ -106,4 +78,3 @@ public class User {
         this.alias = alias;
     }
 }
-
