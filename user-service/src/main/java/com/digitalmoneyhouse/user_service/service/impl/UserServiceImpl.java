@@ -24,6 +24,7 @@ public class UserServiceImpl implements IUserService {
     public UserResponseDTO registerUser(UserRequestDTO userRequestDTO) {
 
 
+
         User user = new User();
         user.setFirstName(userRequestDTO.getFirstName());
         user.setLastName(userRequestDTO.getLastName());

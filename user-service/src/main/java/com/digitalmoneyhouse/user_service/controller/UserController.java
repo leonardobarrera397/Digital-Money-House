@@ -35,7 +35,7 @@ public class UserController {
         UserResponseDTO userResponseDTO = new UserResponseDTO();
         userResponseDTO.setId(1L);
         userResponseDTO.setDni("12345678");
-        userResponseDTO.setFirstName("instancia 2");
+        userResponseDTO.setFirstName("instancia 1");
         userResponseDTO.setLastName("Argento");
         userResponseDTO.setEmail("pepe@email.com");
         userResponseDTO.setPhone("123456789");

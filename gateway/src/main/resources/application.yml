@@ -9,7 +9,7 @@ spring:
     config:
       discovery:
         service-id: config-service
-        enabled: true
+        enabled: false
     gateway:
       mvc:
         routes:
