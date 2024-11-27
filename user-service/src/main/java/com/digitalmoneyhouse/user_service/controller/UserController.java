@@ -7,7 +7,12 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/users")
@@ -51,6 +56,30 @@ public class UserController {
 
         return ResponseEntity.status(HttpStatus.OK).body(userResponseDTO);
     }
+
+    @GetMapping("/user")
+    @PreAuthorize("hasRole('user-client') or hasRole('admin-client')")
+    public String user() {
+
+        return "Hola User desde User-service";
+    }
+
+    @GetMapping("/admin")
+    @PreAuthorize("hasRole('admin-client')")
+    public String admin() {
+
+        return "Hola Admin desde User-service";
+    }
+
+    @GetMapping("/me")
+    public Map<String, Object> getCurrentUser(Authentication authentication) {
+        Map<String, Object> details = new HashMap<>();
+        details.put("name", authentication.getName());
+        details.put("authorities", authentication.getAuthorities());
+        return details;
+    }
+
+
 
 
 }
