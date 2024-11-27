@@ -11,6 +11,8 @@ spring:
         service-id: config-service
         enabled: false
     gateway:
+      default-filters:
+        - TokenRelay=
       mvc:
         routes:
           - id: user-service
