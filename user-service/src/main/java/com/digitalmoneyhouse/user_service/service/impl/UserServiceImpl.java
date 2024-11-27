@@ -6,10 +6,12 @@ import com.digitalmoneyhouse.user_service.model.User;
 import com.digitalmoneyhouse.user_service.repository.UserRepository;
 import com.digitalmoneyhouse.user_service.service.IUserService;
 import com.digitalmoneyhouse.user_service.util.AliasGenerator;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import java.util.Random;
 
 @Service
+@Slf4j
 public class UserServiceImpl implements IUserService {
 
     private final UserRepository userRepository;
@@ -37,7 +39,7 @@ public class UserServiceImpl implements IUserService {
 
 
         User savedUser = userRepository.save(user);
-
+        log.info("User created");
 
         UserResponseDTO responseDTO = new UserResponseDTO();
         responseDTO.setId(savedUser.getId());

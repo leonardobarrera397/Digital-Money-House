@@ -1,5 +1,6 @@
 package com.digitalmoneyhouse.user_service;
 
+import com.digitalmoneyhouse.user_service.dto.UserRequestDTO;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 

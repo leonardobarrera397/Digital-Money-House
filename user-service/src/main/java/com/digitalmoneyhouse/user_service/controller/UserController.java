@@ -4,6 +4,7 @@ import com.digitalmoneyhouse.user_service.dto.UserRequestDTO;
 import com.digitalmoneyhouse.user_service.dto.UserResponseDTO;
 import com.digitalmoneyhouse.user_service.service.IUserService;
 import jakarta.validation.Valid;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +17,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/users")
+@Slf4j
 public class UserController {
 
     private final IUserService userService;
