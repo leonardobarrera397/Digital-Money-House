@@ -24,4 +24,10 @@ public class GatewayController {
 
         return "Hola User";
     }
+
+    @GetMapping("/hola")
+    public String hola() {
+
+        return "Hola";
+    }
 }

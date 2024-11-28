@@ -5,7 +5,7 @@ import org.keycloak.representations.idm.UserRepresentation;
 
 import java.util.List;
 
-public interface IKeycloackService {
+public interface IKeycloakService {
     
     List<UserRepresentation> findAllUsers();
     List<UserRepresentation> searchUserByUsername(String username);
