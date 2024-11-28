@@ -4,26 +4,34 @@ import com.digitalmoneyhouse.user_service.dto.UserRequestDTO;
 import com.digitalmoneyhouse.user_service.dto.UserResponseDTO;
 import com.digitalmoneyhouse.user_service.model.User;
 import com.digitalmoneyhouse.user_service.repository.UserRepository;
+import com.digitalmoneyhouse.user_service.service.IKeycloakService;
 import com.digitalmoneyhouse.user_service.service.IUserService;
 import com.digitalmoneyhouse.user_service.util.AliasGenerator;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.Random;
 
 @Service
+@Slf4j
+@AllArgsConstructor
+@NoArgsConstructor
 public class UserServiceImpl implements IUserService {
 
-    private final UserRepository userRepository;
-    private final AliasGenerator aliasGenerator;
+    @Autowired
+    private AliasGenerator aliasGenerator;
+    @Autowired
+    private UserRepository userRepository;
+    @Autowired
+    private IKeycloakService keycloakService;
 
-    public UserServiceImpl(UserRepository userRepository, AliasGenerator aliasGenerator) {
-        this.userRepository = userRepository;
-        this.aliasGenerator = aliasGenerator;
-    }
 
     @Override
     public UserResponseDTO registerUser(UserRequestDTO userRequestDTO) {
 
-
+        keycloakService.createUser(userRequestDTO);
 
         User user = new User();
         user.setFirstName(userRequestDTO.getFirstName());
@@ -37,7 +45,7 @@ public class UserServiceImpl implements IUserService {
 
 
         User savedUser = userRepository.save(user);
-
+        //log.info("User created");
 
         UserResponseDTO responseDTO = new UserResponseDTO();
         responseDTO.setId(savedUser.getId());

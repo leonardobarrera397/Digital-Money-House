@@ -18,7 +18,7 @@ spring:
           - id: user-service
             uri: lb://user-service
             predicates:
-            - Path=/api/users/*
+            - Path=/api/users/**
             filters:
               - AddRequestHeader=Origen, gateway
               - AddResponseHeader= Header en respuesta, Desde gateway

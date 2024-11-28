@@ -3,7 +3,9 @@ package com.digitalmoneyhouse.user_service.controller;
 import com.digitalmoneyhouse.user_service.dto.UserRequestDTO;
 import com.digitalmoneyhouse.user_service.dto.UserResponseDTO;
 import com.digitalmoneyhouse.user_service.service.IUserService;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +18,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/users")
+@Slf4j
 public class UserController {
 
     private final IUserService userService;
@@ -25,8 +28,21 @@ public class UserController {
         this.userService = userService;
     }
 
+    @GetMapping("/hola")
+    public String hola() {
+
+        return "Hola";
+    }
+
+    @PostMapping("/hola")
+    public String hola(@RequestBody String nombre) {
+
+        return "Hola " + nombre;
+    }
+
     @PostMapping("/register")
-    public ResponseEntity<UserResponseDTO> registerUser(@RequestBody @Valid UserRequestDTO userRequestDTO) {
+    public ResponseEntity<UserResponseDTO> registerUser(HttpServletRequest request,@Valid @RequestBody UserRequestDTO userRequestDTO) {
+        System.out.println("Request URI: " + request.getRequestURI());
         try {
             UserResponseDTO registeredUser = userService.registerUser(userRequestDTO);
             return ResponseEntity.status(HttpStatus.CREATED).body(registeredUser);
@@ -35,7 +51,7 @@ public class UserController {
         }
     }
 
-    @GetMapping("/prueba")
+   /** @GetMapping("/prueba")
     public ResponseEntity<UserResponseDTO> prueba(@RequestHeader("Origen") String origen) {
         UserResponseDTO userResponseDTO = new UserResponseDTO();
         userResponseDTO.setId(1L);
@@ -56,7 +72,7 @@ public class UserController {
 
         return ResponseEntity.status(HttpStatus.OK).body(userResponseDTO);
     }
-
+**/
     @GetMapping("/user")
     @PreAuthorize("hasRole('user-client') or hasRole('admin-client')")
     public String user() {

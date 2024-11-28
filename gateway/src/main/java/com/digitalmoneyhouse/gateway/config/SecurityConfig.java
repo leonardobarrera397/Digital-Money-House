@@ -17,6 +17,7 @@ public class SecurityConfig {
     @Autowired
     private final JwtAuthenticationConverter jwtAuthenticationConverter;
 
+
     public SecurityConfig(JwtAuthenticationConverter jwtAuthenticationConverter) {
         this.jwtAuthenticationConverter = jwtAuthenticationConverter;
     }
@@ -24,8 +25,12 @@ public class SecurityConfig {
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
 
+
         return httpSecurity
-                .authorizeHttpRequests(http -> http.anyRequest().authenticated())
+                .csrf(csrf -> csrf.disable())
+                .authorizeHttpRequests(http -> http
+                        .requestMatchers("/register", "/api/users/register", "/api/users/hola").permitAll()
+                        .anyRequest().authenticated())
                 .oauth2ResourceServer(oauth -> {
                     oauth.jwt(jwt -> jwt.jwtAuthenticationConverter(jwtAuthenticationConverter));
                 })

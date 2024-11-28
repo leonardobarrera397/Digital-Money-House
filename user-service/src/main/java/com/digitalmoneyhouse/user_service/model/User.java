@@ -1,6 +1,13 @@
 package com.digitalmoneyhouse.user_service.model;
 import jakarta.persistence.*;
+import lombok.*;
+import lombok.experimental.FieldDefaults;
 
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE)
+@Builder
 @Entity
 @Table(name = "users")
 public class User {
@@ -32,7 +39,6 @@ public class User {
 
     @Column(nullable = false, unique = true)
     private String alias;
-
 
     public Long getId() {
         return id;

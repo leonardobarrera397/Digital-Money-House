@@ -3,28 +3,38 @@ package com.digitalmoneyhouse.user_service.dto;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
+import lombok.*;
+import lombok.experimental.FieldDefaults;
 
+import java.util.List;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class UserRequestDTO {
 
     @NotBlank(message = "First name is required")
-    private String firstName;
+    String firstName;
 
     @NotBlank(message = "Last name is required")
-    private String lastName;
+    String lastName;
 
     @NotBlank(message = "DNI is required")
-    private String dni;
+    String dni;
 
     @NotBlank(message = "Email is required")
     @Email(message = "Invalid email format")
-    private String email;
+    String email;
 
     @NotBlank(message = "Phone is required")
-    private String phone;
+    String phone;
 
     @NotBlank(message = "Password is required")
     @Size(min = 8, message = "Password must be at least 8 characters long")
-    private String password;
+    String password;
+
+    List<String> roles;
 
     public @NotBlank(message = "First name is required") String getFirstName() {
         return firstName;
@@ -72,5 +82,13 @@ public class UserRequestDTO {
 
     public void setPassword(@NotBlank(message = "Password is required") @Size(min = 8, message = "Password must be at least 8 characters long") String password) {
         this.password = password;
+    }
+
+    public List<String> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<String> roles) {
+        this.roles = roles;
     }
 }
